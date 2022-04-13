@@ -79,14 +79,14 @@ class VideoLoader:
         self.capture.set(cv2.CAP_PROP_BUFFERSIZE, 1)
 
         self.title = title
-        self.success, self.frame = None, None
+        self.updated, self.frame = None, None
         self.color_spaces = {
             'rgb': cv2.COLOR_BGR2RGB,
             'bgr': cv2.COLOR_RGB2BGR
         }
 
     def update(self):
-        self.success, self.frame = self.capture.read()
+        self.updated, self.frame = self.capture.read()
         # self.frame.flags.writeable = False
         # self.frame = cv2.flip(frame, 1)
 
@@ -112,7 +112,7 @@ class VideoLoader:
 def main():
     # stream = Webcam()
     stream = VideoLoader("test_video.mp4")
-    while stream.success:
+    while stream.updated:
         stream.update()
         stream.set_color_space('rgb')
         stream.set_color_space('bgr')

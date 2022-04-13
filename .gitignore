@@ -131,3 +131,4 @@ dmypy.json
 # Pyre type checker
 .pyre/
 /src/visualize/
+/src/cgt_utils/test_video.mp4

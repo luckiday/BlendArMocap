@@ -15,9 +15,9 @@ class WM_modal_detection_operator(bpy.types.Operator):
         from ...cgt_detection import detect_hands, detect_pose, detect_face
 
         handlers = {
-            "POSE":     detect_pose.PoseDetector,
-            "HAND":     detect_hands.HandDetector,
-            "FACE":     detect_face.FaceDetector,
+            "POSE": detect_pose.PoseDetector,
+            "HAND": detect_hands.HandDetector,
+            "FACE": detect_face.FaceDetector,
             "HOLISTIC": ""
         }
 
@@ -29,7 +29,7 @@ class WM_modal_detection_operator(bpy.types.Operator):
         # default detection type for testing while add-on is not registered
         detection_type = 'HAND'
         try:
-            self.user = context.scene.m_cgtinker_mediapipe # noqa
+            self.user = context.scene.m_cgtinker_mediapipe  # noqa
             detection_type = self.user.enum_detection_type
         except AttributeError:
             print("CGT USER NOT FOUND")
@@ -52,11 +52,18 @@ class WM_modal_detection_operator(bpy.types.Operator):
 
         # default camera index if add-on is not registered
         camera_index = 0
+        video_dir = ""
         if self.user is not None:
             camera_index = self.user.webcam_input_device
+            video_dir = self.user.video_file
 
         # init tracking handler targets
         self.tracking_handler.stream = stream.Webcam(camera_index=camera_index)
+
+        # use file as the input
+        if video_dir != "":
+            self.tracking_handler.stream = stream.VideoLoader(file_directory=video_dir)
+
         if not self.tracking_handler.stream.capture.isOpened():
             raise IOError("Initializing Detector failed.")
 

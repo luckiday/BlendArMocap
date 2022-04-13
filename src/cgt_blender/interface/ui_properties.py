@@ -59,6 +59,14 @@ class CgtProperties(PropertyGroup):
         default=0
     )
 
+    video_file: StringProperty(
+        name="Video Path",
+        description="File path to video file.",
+        default="",
+        maxlen=1024,
+        subtype='FILE_PATH'
+    )
+
     key_frame_step: IntProperty(
         name="Key Step",
         description="Select keyframe step rate.",
