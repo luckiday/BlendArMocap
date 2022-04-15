@@ -5,7 +5,7 @@ import cv2
 
 class VideoLoader:
     def __init__(self,
-                 file_directory: str,
+                 file_directory: str = "",
                  title: str = "Video Detection",
                  width: int = 640,
                  height: int = 480):
@@ -45,8 +45,8 @@ class VideoLoader:
         cv2.imshow(self.title, self.frame)
 
     def exit_stream(self):
-        if cv2.waitKey(1) & 0xFF == ord('q'):
-            print("ATTEMPT TO EXIT STEAM")
+        if not self.updated:
+            print("Processing Finished")
             return True
         else:
             return False

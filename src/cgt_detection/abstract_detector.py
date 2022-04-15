@@ -48,7 +48,7 @@ class RealtimeDetector(ABC):
 
     def exec_detection(self, mp_lib):
         if not self.stream_updated():
-            return {'PASS_THROUGH'}
+            return {'FINISHED'}
 
         # detect features in frame
         self.stream.frame.flags.writeable = False
@@ -73,14 +73,13 @@ class RealtimeDetector(ABC):
 
         # exit stream
         if self.stream.exit_stream():
-            return {'CANCELLED'}
+            return {'FINISHED'}
         return {'PASS_THROUGH'}
 
     def stream_updated(self):
         self.stream.update()
         if not self.stream.updated:
-            print("Ignoring empty camera frame or processing finished")
-            del self.stream
+            print("Processing finished")
             return False
         return True
 

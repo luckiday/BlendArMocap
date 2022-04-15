@@ -20,7 +20,7 @@ class HandDetector(abstract_detector.RealtimeDetector):
                 static_image_mode=False,
                 max_num_hands=2
         ) as mp_lib:
-            while self.stream.capture.isOpened():
+            while self.stream.updated:
                 state = self.exec_detection(mp_lib)
                 if state == {'CANCELLED'}:
                     return {'CANCELLED'}
@@ -69,7 +69,7 @@ def stream_detection(tracking_handler):
 def init_test():
     tracking_handler = HandDetector()
 
-    tracking_handler.stream = stream.Webcam()
+    tracking_handler.stream = stream.VideoLoader()
     tracking_handler.initialize_model()
     tracking_handler.init_debug_logs()
     tracking_handler.listener.attach(tracking_handler.observer)

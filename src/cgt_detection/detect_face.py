@@ -26,7 +26,7 @@ class FaceDetector(abstract_detector.RealtimeDetector):
                 refine_landmarks=True,
                 static_image_mode=False,
         ) as mp_lib:
-            while self.stream.capture.isOpened():
+            while self.stream.updated:
                 state = self.exec_detection(mp_lib)
                 if state == {'CANCELLED'}:
                     return {'CANCELLED'}
@@ -117,7 +117,7 @@ def stream_detection(tracking_handler):
 def init_test():
     tracking_handler = FaceDetector()
 
-    tracking_handler.stream = stream.Webcam()
+    tracking_handler.stream = stream.VideoLoader()
     tracking_handler.initialize_model()
     # tracking_handler.init_driver_logs()
     tracking_handler.init_raw_data_printer()
