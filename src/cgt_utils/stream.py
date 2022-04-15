@@ -42,6 +42,7 @@ class VideoLoader:
         self.frame = cv2.cvtColor(self.frame, self.color_spaces[space])
 
     def draw(self):
+        self.frame = cv2.flip(self.frame, 1)
         cv2.imshow(self.title, self.frame)
 
     def exit_stream(self):
