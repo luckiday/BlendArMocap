@@ -50,14 +50,24 @@ class CgtProperties(PropertyGroup):
         )
     )
 
-    # Integer Input
-    webcam_input_device: IntProperty(
-        name="Webcam Device Slot",
-        description="Select Webcam device.",
-        min=0,
-        max=4,
-        default=0
+    video_enum_detection_type: EnumProperty(
+        name="Target",
+        description="Select detection type for motion tracking.",
+        items=(
+            ("HAND", "Hands", ""),
+            ("FACE", "Face", ""),
+            ("POSE", "Pose", ""),
+        )
     )
+
+    # # Integer Input
+    # webcam_input_device: IntProperty(
+    #     name="Webcam Device Slot",
+    #     description="Select Webcam device.",
+    #     min=0,
+    #     max=4,
+    #     default=0
+    # )
 
     video_file: StringProperty(
         name="Video Path",

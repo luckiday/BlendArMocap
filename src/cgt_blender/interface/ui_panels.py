@@ -31,14 +31,20 @@ class UI_PT_main_panel(DefaultPanel, Panel):
     def draw(self, context):
         user = context.scene.m_cgtinker_mediapipe
 
-        # detection
+        # # detection from webcam
+        # box = self.layout.box()
+        # box.label(text='Stream Detect')
+        # box.row().prop(user, "webcam_input_device")
+        # box.row().prop(user, "key_frame_step")
+        # box.row().prop(user, "enum_detection_type")
+
+        # detection from file
         box = self.layout.box()
-        box.label(text='Detect')
-        box.row().prop(user, "webcam_input_device")
+        box.label(text='File Detect')
         box.row().prop(user, "video_file")
         box.row().prop(user, "key_frame_step")
-        box.row().prop(user, "enum_detection_type")
-        box.row().operator("wm.cgt_feature_detection_operator", text=user.button_start_detection)
+        box.row().prop(user, "video_enum_detection_type")
+        box.row().operator("wm.cgt_feature_video_detection_operator", text=user.button_start_detection)
 
         # transfer animation
         box = self.layout.box()

@@ -79,7 +79,8 @@ class RealtimeDetector(ABC):
     def stream_updated(self):
         self.stream.update()
         if not self.stream.updated:
-            print("Ignoring empty camera frame")
+            print("Ignoring empty camera frame or processing finished")
+            del self.stream
             return False
         return True
 

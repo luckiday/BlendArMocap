@@ -2,7 +2,7 @@ import bpy
 from bpy.props import PointerProperty
 from bpy.utils import register_class, unregister_class
 
-from . import ui_properties, ui_panels, ui_preferences, stream_detection_operator
+from . import ui_properties, ui_panels, ui_preferences, video_detection_operator
 from ..utils import install_dependencies
 
 
@@ -10,10 +10,8 @@ def get_classes():
     # getting classes to avoid loading possibly unavailable packages
     classes = (
         ui_properties.CgtProperties,
-
         ui_panels.UI_transfer_anim_button,
-        stream_detection_operator.WM_modal_detection_operator,
-
+        video_detection_operator.WM_modal_video_detection_operator,
         ui_panels.UI_PT_main_panel
     )
     return classes
